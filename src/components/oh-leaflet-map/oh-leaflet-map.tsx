@@ -17,7 +17,7 @@ export class OhLeafletMap implements ComponentInterface {
     this.map.setView(view);
   }
 
-  @Prop() zoom: number;
+  @Prop() zoom: number = 6;
 
   @Watch('zoom')
   watchZoomChange(zoom: number) {

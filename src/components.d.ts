@@ -11,6 +11,10 @@ export namespace Components {
         "view": L.LatLngExpression;
         "zoom": number;
     }
+    interface OhLeafletTileLayer {
+        "options"?: L.TileLayerOptions;
+        "urlTemplate": string;
+    }
 }
 declare global {
     interface HTMLOhLeafletMapElement extends Components.OhLeafletMap, HTMLStencilElement {
@@ -19,8 +23,15 @@ declare global {
         prototype: HTMLOhLeafletMapElement;
         new (): HTMLOhLeafletMapElement;
     };
+    interface HTMLOhLeafletTileLayerElement extends Components.OhLeafletTileLayer, HTMLStencilElement {
+    }
+    var HTMLOhLeafletTileLayerElement: {
+        prototype: HTMLOhLeafletTileLayerElement;
+        new (): HTMLOhLeafletTileLayerElement;
+    };
     interface HTMLElementTagNameMap {
         "oh-leaflet-map": HTMLOhLeafletMapElement;
+        "oh-leaflet-tile-layer": HTMLOhLeafletTileLayerElement;
     }
 }
 declare namespace LocalJSX {
@@ -28,8 +39,13 @@ declare namespace LocalJSX {
         "view"?: L.LatLngExpression;
         "zoom"?: number;
     }
+    interface OhLeafletTileLayer {
+        "options"?: L.TileLayerOptions;
+        "urlTemplate": string;
+    }
     interface IntrinsicElements {
         "oh-leaflet-map": OhLeafletMap;
+        "oh-leaflet-tile-layer": OhLeafletTileLayer;
     }
 }
 export { LocalJSX as JSX };
@@ -37,6 +53,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "oh-leaflet-map": LocalJSX.OhLeafletMap & JSXBase.HTMLAttributes<HTMLOhLeafletMapElement>;
+            "oh-leaflet-tile-layer": LocalJSX.OhLeafletTileLayer & JSXBase.HTMLAttributes<HTMLOhLeafletTileLayerElement>;
         }
     }
 }
