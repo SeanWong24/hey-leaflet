@@ -8,31 +8,30 @@ import L from 'leaflet';
 })
 export class OhLeafletMap implements ComponentInterface {
   private containerElement: HTMLElement;
-  private map: L.Map;
+  private mapInstance: L.Map;
 
   @Prop() view: L.LatLngExpression = [0, 0];
 
   @Watch('view')
   watchViewChange(view: L.LatLngExpression) {
-    this.map.setView(view);
+    this.mapInstance.setView(view);
   }
 
   @Prop() zoom: number = 6;
 
   @Watch('zoom')
   watchZoomChange(zoom: number) {
-    debugger;
-    this.map.setZoom(zoom);
+    this.mapInstance.setZoom(zoom);
   }
 
   componentDidLoad() {
-    this.map = L.map(this.containerElement);
+    this.mapInstance = L.map(this.containerElement);
     this.initializeProps();
   }
 
   @Method()
   async getMapInstance() {
-    return this.map;
+    return this.mapInstance;
   }
 
   render() {
