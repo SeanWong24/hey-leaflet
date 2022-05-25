@@ -11,16 +11,20 @@
 </head>
 
 <body>
-  <oh-leaflet-map style="width: 500px; height: 500px;">
+  <oh-leaflet-map id="map" style="width: 500px; height: 500px;">
     <oh-leaflet-tile-layer id="tile-layer"
       url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
     </oh-leaflet-tile-layer>
   </oh-leaflet-map>
 
   <script>
-    const tileLayer = document.querySelector('#tile-layer').options = {
+    const tileLayer = document.querySelector('#tile-layer');
+    tileLayer.options = {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     };
+
+    const map = document.querySelector('#map');
+    map.view = [49, -123];
   </script>
 </body>
 
