@@ -42,11 +42,11 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
 
   async connectedCallback() {
     this.mapInstance = await this.parentMapElement?.getMapInstance();
-    this.mapInstance?.addLayer(this.tileLayerInstance);
+    this.tileLayerInstance?.addTo(this.mapInstance);
   }
 
   async disconnectedCallback() {
-    this.mapInstance.removeLayer(this.tileLayerInstance);
+    this.tileLayerInstance?.remove();
   }
 
   @Method()
