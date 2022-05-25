@@ -38,10 +38,23 @@ export class HeyLeafletGeojson implements ComponentInterface, LayerElement {
     this.geoJSONInstance.options = Object.assign(this.geoJSONInstance.options, options);
   }
 
+  @Prop() active: boolean;
+
+  @Watch('active')
+  watchActiveChange(active: boolean) {
+    if (active) {
+      this.geoJSONInstance?.addTo(this.mapInstance);
+    } else {
+      this.geoJSONInstance?.remove();
+    }
+  }
+
   async connectedCallback() {
     this.watchGeojsonChange(this.geojson);
     this.mapInstance = await this.parentMapElement?.getMapInstance();
-    this.geoJSONInstance?.addTo(this.mapInstance);
+    if (this.active) {
+      this.geoJSONInstance?.addTo(this.mapInstance);
+    }
   }
 
   async disconnectedCallback() {

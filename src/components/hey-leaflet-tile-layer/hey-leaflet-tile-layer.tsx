@@ -36,13 +36,26 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
     this.tileLayerInstance.options = Object.assign(this.tileLayerInstance.options, options);
   }
 
+  @Prop() active: boolean;
+
+  @Watch('active')
+  watchActiveChange(active: boolean) {
+    if (active) {
+      this.tileLayerInstance?.addTo(this.mapInstance);
+    } else {
+      this.tileLayerInstance?.remove();
+    }
+  }
+
   constructor() {
     this.tileLayerInstance = L.tileLayer(this.urlTemplate, this.options);
   }
 
   async connectedCallback() {
     this.mapInstance = await this.parentMapElement?.getMapInstance();
-    this.tileLayerInstance?.addTo(this.mapInstance);
+    if (this.active) {
+      this.tileLayerInstance?.addTo(this.mapInstance);
+    }
   }
 
   async disconnectedCallback() {

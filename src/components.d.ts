@@ -9,6 +9,7 @@ import { GeoJsonObject } from "geojson";
 import { LayerControlLayerDict } from "./components/hey-leaflet-layer-control/hey-leaflet-layer-control";
 export namespace Components {
     interface HeyLeafletGeojson {
+        "active": boolean;
         "geojson": GeoJsonObject;
         "getLayerInstance": () => Promise<L.GeoJSON<any>>;
         "options"?: L.GeoJSONOptions;
@@ -24,6 +25,7 @@ export namespace Components {
         "zoom": number;
     }
     interface HeyLeafletTileLayer {
+        "active": boolean;
         "getLayerInstance": () => Promise<L.TileLayer>;
         "options"?: L.TileLayerOptions;
         "urlTemplate": string;
@@ -63,6 +65,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface HeyLeafletGeojson {
+        "active"?: boolean;
         "geojson"?: GeoJsonObject;
         "options"?: L.GeoJSONOptions;
     }
@@ -76,6 +79,7 @@ declare namespace LocalJSX {
         "zoom"?: number;
     }
     interface HeyLeafletTileLayer {
+        "active"?: boolean;
         "options"?: L.TileLayerOptions;
         "urlTemplate": string;
     }
