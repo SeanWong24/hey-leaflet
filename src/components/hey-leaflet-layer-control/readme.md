@@ -10,6 +10,7 @@
 | Property     | Attribute | Description | Type                                     | Default     |
 | ------------ | --------- | ----------- | ---------------------------------------- | ----------- |
 | `baseLayers` | --        |             | `{ [name: string]: string \| Element; }` | `undefined` |
+| `options`    | --        |             | `LayersOptions`                          | `undefined` |
 | `overlays`   | --        |             | `{ [name: string]: string \| Element; }` | `undefined` |
 
 

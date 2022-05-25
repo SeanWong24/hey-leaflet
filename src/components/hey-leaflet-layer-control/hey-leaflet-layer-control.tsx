@@ -42,7 +42,7 @@ export class HeyLeafletLayerControl implements ComponentInterface {
       }),
     );
     this.reslovedBaseLayers = Object.fromEntries(resolvedDictEntries);
-    this.layerControlInstance = L.control.layers(this.reslovedBaseLayers || {}, this.reslovedOverlays || {});
+    this.layerControlInstance = L.control.layers(this.reslovedBaseLayers || {}, this.reslovedOverlays || {}, this.options);
     this.addLayerControlInstanceToMap();
   }
 
@@ -61,11 +61,16 @@ export class HeyLeafletLayerControl implements ComponentInterface {
       }),
     );
     this.reslovedOverlays = Object.fromEntries(resolvedEntries);
-    this.layerControlInstance = L.control.layers(this.reslovedBaseLayers || {}, this.reslovedOverlays || {});
+    this.layerControlInstance = L.control.layers(this.reslovedBaseLayers || {}, this.reslovedOverlays || {}, this.options);
     this.addLayerControlInstanceToMap();
   }
 
-  constructor() {}
+  @Prop() options: L.Control.LayersOptions;
+
+  @Watch('options')
+  watchOptionsChange(options: L.TileLayerOptions) {
+    this.layerControlInstance.options = Object.assign(this.layerControlInstance.options, options);
+  }
 
   async connectedCallback() {
     await this.addLayerControlInstanceToMap();

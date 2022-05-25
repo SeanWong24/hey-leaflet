@@ -15,6 +15,7 @@ export namespace Components {
     }
     interface HeyLeafletLayerControl {
         "baseLayers": LayerControlLayerDict;
+        "options": L.Control.LayersOptions;
         "overlays": LayerControlLayerDict;
     }
     interface HeyLeafletMap {
@@ -67,6 +68,7 @@ declare namespace LocalJSX {
     }
     interface HeyLeafletLayerControl {
         "baseLayers"?: LayerControlLayerDict;
+        "options"?: L.Control.LayersOptions;
         "overlays"?: LayerControlLayerDict;
     }
     interface HeyLeafletMap {
