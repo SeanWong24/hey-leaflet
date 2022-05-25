@@ -9,6 +9,7 @@
 
 | Property                   | Attribute      | Description | Type               | Default     |
 | -------------------------- | -------------- | ----------- | ------------------ | ----------- |
+| `active`                   | `active`       |             | `boolean`          | `undefined` |
 | `options`                  | --             |             | `TileLayerOptions` | `undefined` |
 | `urlTemplate` _(required)_ | `url-template` |             | `string`           | `undefined` |
 

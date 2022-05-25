@@ -9,6 +9,7 @@
 
 | Property  | Attribute | Description | Type                  | Default     |
 | --------- | --------- | ----------- | --------------------- | ----------- |
+| `active`  | `active`  |             | `boolean`             | `undefined` |
 | `geojson` | --        |             | `GeoJsonObject`       | `undefined` |
 | `options` | --        |             | `GeoJSONOptions<any>` | `undefined` |
 
