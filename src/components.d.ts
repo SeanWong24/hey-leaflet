@@ -6,92 +6,92 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { GeoJsonObject } from "geojson";
-import { LayerControlLayerDict } from "./components/oh-leaflet-layer-control/oh-leaflet-layer-control";
+import { LayerControlLayerDict } from "./components/hey-leaflet-layer-control/hey-leaflet-layer-control";
 export namespace Components {
-    interface OhLeafletGeojson {
+    interface HeyLeafletGeojson {
         "geojson": GeoJsonObject;
         "getLayerInstance": () => Promise<L.GeoJSON<any>>;
         "options"?: L.GeoJSONOptions;
     }
-    interface OhLeafletLayerControl {
+    interface HeyLeafletLayerControl {
         "baseLayers": LayerControlLayerDict;
         "overlays": LayerControlLayerDict;
     }
-    interface OhLeafletMap {
+    interface HeyLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
         "view": L.LatLngExpression;
         "zoom": number;
     }
-    interface OhLeafletTileLayer {
+    interface HeyLeafletTileLayer {
         "getLayerInstance": () => Promise<L.TileLayer>;
         "options"?: L.TileLayerOptions;
         "urlTemplate": string;
     }
 }
 declare global {
-    interface HTMLOhLeafletGeojsonElement extends Components.OhLeafletGeojson, HTMLStencilElement {
+    interface HTMLHeyLeafletGeojsonElement extends Components.HeyLeafletGeojson, HTMLStencilElement {
     }
-    var HTMLOhLeafletGeojsonElement: {
-        prototype: HTMLOhLeafletGeojsonElement;
-        new (): HTMLOhLeafletGeojsonElement;
+    var HTMLHeyLeafletGeojsonElement: {
+        prototype: HTMLHeyLeafletGeojsonElement;
+        new (): HTMLHeyLeafletGeojsonElement;
     };
-    interface HTMLOhLeafletLayerControlElement extends Components.OhLeafletLayerControl, HTMLStencilElement {
+    interface HTMLHeyLeafletLayerControlElement extends Components.HeyLeafletLayerControl, HTMLStencilElement {
     }
-    var HTMLOhLeafletLayerControlElement: {
-        prototype: HTMLOhLeafletLayerControlElement;
-        new (): HTMLOhLeafletLayerControlElement;
+    var HTMLHeyLeafletLayerControlElement: {
+        prototype: HTMLHeyLeafletLayerControlElement;
+        new (): HTMLHeyLeafletLayerControlElement;
     };
-    interface HTMLOhLeafletMapElement extends Components.OhLeafletMap, HTMLStencilElement {
+    interface HTMLHeyLeafletMapElement extends Components.HeyLeafletMap, HTMLStencilElement {
     }
-    var HTMLOhLeafletMapElement: {
-        prototype: HTMLOhLeafletMapElement;
-        new (): HTMLOhLeafletMapElement;
+    var HTMLHeyLeafletMapElement: {
+        prototype: HTMLHeyLeafletMapElement;
+        new (): HTMLHeyLeafletMapElement;
     };
-    interface HTMLOhLeafletTileLayerElement extends Components.OhLeafletTileLayer, HTMLStencilElement {
+    interface HTMLHeyLeafletTileLayerElement extends Components.HeyLeafletTileLayer, HTMLStencilElement {
     }
-    var HTMLOhLeafletTileLayerElement: {
-        prototype: HTMLOhLeafletTileLayerElement;
-        new (): HTMLOhLeafletTileLayerElement;
+    var HTMLHeyLeafletTileLayerElement: {
+        prototype: HTMLHeyLeafletTileLayerElement;
+        new (): HTMLHeyLeafletTileLayerElement;
     };
     interface HTMLElementTagNameMap {
-        "oh-leaflet-geojson": HTMLOhLeafletGeojsonElement;
-        "oh-leaflet-layer-control": HTMLOhLeafletLayerControlElement;
-        "oh-leaflet-map": HTMLOhLeafletMapElement;
-        "oh-leaflet-tile-layer": HTMLOhLeafletTileLayerElement;
+        "hey-leaflet-geojson": HTMLHeyLeafletGeojsonElement;
+        "hey-leaflet-layer-control": HTMLHeyLeafletLayerControlElement;
+        "hey-leaflet-map": HTMLHeyLeafletMapElement;
+        "hey-leaflet-tile-layer": HTMLHeyLeafletTileLayerElement;
     }
 }
 declare namespace LocalJSX {
-    interface OhLeafletGeojson {
+    interface HeyLeafletGeojson {
         "geojson"?: GeoJsonObject;
         "options"?: L.GeoJSONOptions;
     }
-    interface OhLeafletLayerControl {
+    interface HeyLeafletLayerControl {
         "baseLayers"?: LayerControlLayerDict;
         "overlays"?: LayerControlLayerDict;
     }
-    interface OhLeafletMap {
+    interface HeyLeafletMap {
         "view"?: L.LatLngExpression;
         "zoom"?: number;
     }
-    interface OhLeafletTileLayer {
+    interface HeyLeafletTileLayer {
         "options"?: L.TileLayerOptions;
         "urlTemplate": string;
     }
     interface IntrinsicElements {
-        "oh-leaflet-geojson": OhLeafletGeojson;
-        "oh-leaflet-layer-control": OhLeafletLayerControl;
-        "oh-leaflet-map": OhLeafletMap;
-        "oh-leaflet-tile-layer": OhLeafletTileLayer;
+        "hey-leaflet-geojson": HeyLeafletGeojson;
+        "hey-leaflet-layer-control": HeyLeafletLayerControl;
+        "hey-leaflet-map": HeyLeafletMap;
+        "hey-leaflet-tile-layer": HeyLeafletTileLayer;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "oh-leaflet-geojson": LocalJSX.OhLeafletGeojson & JSXBase.HTMLAttributes<HTMLOhLeafletGeojsonElement>;
-            "oh-leaflet-layer-control": LocalJSX.OhLeafletLayerControl & JSXBase.HTMLAttributes<HTMLOhLeafletLayerControlElement>;
-            "oh-leaflet-map": LocalJSX.OhLeafletMap & JSXBase.HTMLAttributes<HTMLOhLeafletMapElement>;
-            "oh-leaflet-tile-layer": LocalJSX.OhLeafletTileLayer & JSXBase.HTMLAttributes<HTMLOhLeafletTileLayerElement>;
+            "hey-leaflet-geojson": LocalJSX.HeyLeafletGeojson & JSXBase.HTMLAttributes<HTMLHeyLeafletGeojsonElement>;
+            "hey-leaflet-layer-control": LocalJSX.HeyLeafletLayerControl & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerControlElement>;
+            "hey-leaflet-map": LocalJSX.HeyLeafletMap & JSXBase.HTMLAttributes<HTMLHeyLeafletMapElement>;
+            "hey-leaflet-tile-layer": LocalJSX.HeyLeafletTileLayer & JSXBase.HTMLAttributes<HTMLHeyLeafletTileLayerElement>;
         }
     }
 }
