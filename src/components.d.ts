@@ -7,6 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface OhLeafletMap {
+        "getMapInstance": () => Promise<L.Map>;
+        "view": L.LatLngExpression;
+        "zoom": number;
     }
 }
 declare global {
@@ -22,6 +25,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface OhLeafletMap {
+        "view"?: L.LatLngExpression;
+        "zoom"?: number;
     }
     interface IntrinsicElements {
         "oh-leaflet-map": OhLeafletMap;
