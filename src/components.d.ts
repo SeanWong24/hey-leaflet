@@ -5,18 +5,30 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { LayerControlLayerDict } from "./components/oh-leaflet-layer-control/oh-leaflet-layer-control";
 export namespace Components {
+    interface OhLeafletLayerControl {
+        "baseLayers": LayerControlLayerDict;
+        "overlays": LayerControlLayerDict;
+    }
     interface OhLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
         "view": L.LatLngExpression;
         "zoom": number;
     }
     interface OhLeafletTileLayer {
+        "getLayerInstance": () => Promise<L.TileLayer>;
         "options"?: L.TileLayerOptions;
         "urlTemplate": string;
     }
 }
 declare global {
+    interface HTMLOhLeafletLayerControlElement extends Components.OhLeafletLayerControl, HTMLStencilElement {
+    }
+    var HTMLOhLeafletLayerControlElement: {
+        prototype: HTMLOhLeafletLayerControlElement;
+        new (): HTMLOhLeafletLayerControlElement;
+    };
     interface HTMLOhLeafletMapElement extends Components.OhLeafletMap, HTMLStencilElement {
     }
     var HTMLOhLeafletMapElement: {
@@ -30,11 +42,16 @@ declare global {
         new (): HTMLOhLeafletTileLayerElement;
     };
     interface HTMLElementTagNameMap {
+        "oh-leaflet-layer-control": HTMLOhLeafletLayerControlElement;
         "oh-leaflet-map": HTMLOhLeafletMapElement;
         "oh-leaflet-tile-layer": HTMLOhLeafletTileLayerElement;
     }
 }
 declare namespace LocalJSX {
+    interface OhLeafletLayerControl {
+        "baseLayers"?: LayerControlLayerDict;
+        "overlays"?: LayerControlLayerDict;
+    }
     interface OhLeafletMap {
         "view"?: L.LatLngExpression;
         "zoom"?: number;
@@ -44,6 +61,7 @@ declare namespace LocalJSX {
         "urlTemplate": string;
     }
     interface IntrinsicElements {
+        "oh-leaflet-layer-control": OhLeafletLayerControl;
         "oh-leaflet-map": OhLeafletMap;
         "oh-leaflet-tile-layer": OhLeafletTileLayer;
     }
@@ -52,6 +70,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "oh-leaflet-layer-control": LocalJSX.OhLeafletLayerControl & JSXBase.HTMLAttributes<HTMLOhLeafletLayerControlElement>;
             "oh-leaflet-map": LocalJSX.OhLeafletMap & JSXBase.HTMLAttributes<HTMLOhLeafletMapElement>;
             "oh-leaflet-tile-layer": LocalJSX.OhLeafletTileLayer & JSXBase.HTMLAttributes<HTMLOhLeafletTileLayerElement>;
         }

@@ -12,6 +12,7 @@
 
 <body>
   <oh-leaflet-map id="map" style="width: 500px; height: 500px;">
+    <oh-leaflet-layer-control id="layer-control"></oh-leaflet-layer-control>
     <oh-leaflet-tile-layer id="tile-layer"
       url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
     </oh-leaflet-tile-layer>
@@ -25,6 +26,9 @@
 
     const map = document.querySelector('#map');
     map.view = [49, -123];
+
+    const layerControl = document.querySelector('#layer-control');
+    layerControl.overlays = { Satelitte: tileLayer };
   </script>
 </body>
 

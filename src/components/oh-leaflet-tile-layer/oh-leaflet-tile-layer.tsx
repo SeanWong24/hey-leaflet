@@ -1,12 +1,13 @@
-import { Component, Host, h, ComponentInterface, Prop, Watch, Element } from '@stencil/core';
+import { Component, Host, h, ComponentInterface, Prop, Watch, Element, Method } from '@stencil/core';
 import L from 'leaflet';
+import { LayerElement } from '../../utils/layer-element';
 
 @Component({
   tag: 'oh-leaflet-tile-layer',
   styleUrl: 'oh-leaflet-tile-layer.css',
   shadow: true,
 })
-export class OhLeafletTileLayer implements ComponentInterface {
+export class OhLeafletTileLayer implements ComponentInterface, LayerElement {
   private readonly PARENT_MAP_ELEMENT_TAG = 'oh-leaflet-map';
 
   private tileLayerInstance: L.TileLayer;
@@ -46,6 +47,11 @@ export class OhLeafletTileLayer implements ComponentInterface {
 
   async disconnectedCallback() {
     this.mapInstance.removeLayer(this.tileLayerInstance);
+  }
+
+  @Method()
+  async getLayerInstance() {
+    return this.tileLayerInstance;
   }
 
   render() {
