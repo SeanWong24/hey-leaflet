@@ -21,6 +21,7 @@ export namespace Components {
     }
     interface HeyLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
+        "options": L.MapOptions;
         "view": L.LatLngExpression;
         "zoom": number;
     }
@@ -75,6 +76,7 @@ declare namespace LocalJSX {
         "overlays"?: LayerControlLayerDict;
     }
     interface HeyLeafletMap {
+        "options"?: L.MapOptions;
         "view"?: L.LatLngExpression;
         "zoom"?: number;
     }

@@ -23,19 +23,13 @@ export class HeyLeafletGeojson implements ComponentInterface, LayerElement {
 
   @Element() hostElement: HTMLHeyLeafletGeojsonElement;
 
+  @Prop() options?: L.GeoJSONOptions;
+
   @Prop() geojson: GeoJsonObject;
 
   @Watch('geojson')
-  watchGeojsonChange(geojson: GeoJsonObject) {
-    this.geoJSONInstance = L.geoJSON(geojson);
-    this.watchOptionsChange(this.options);
-  }
-
-  @Prop() options?: L.GeoJSONOptions;
-
-  @Watch('options')
-  watchOptionsChange(options: L.GeoJSONOptions) {
-    this.geoJSONInstance.options = Object.assign(this.geoJSONInstance.options, options);
+  watchGeojsonChange() {
+    this.createGeoJSONInstance();
   }
 
   @Prop() active: boolean;
@@ -50,7 +44,7 @@ export class HeyLeafletGeojson implements ComponentInterface, LayerElement {
   }
 
   async connectedCallback() {
-    this.watchGeojsonChange(this.geojson);
+    this.createGeoJSONInstance();
     this.mapInstance = await this.parentMapElement?.getMapInstance();
     if (this.active) {
       this.geoJSONInstance?.addTo(this.mapInstance);
@@ -68,5 +62,9 @@ export class HeyLeafletGeojson implements ComponentInterface, LayerElement {
 
   render() {
     return <Host></Host>;
+  }
+
+  private createGeoJSONInstance() {
+    this.geoJSONInstance = L.geoJSON(this.geojson, this.options);
   }
 }

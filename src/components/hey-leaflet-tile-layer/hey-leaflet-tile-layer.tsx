@@ -31,11 +31,6 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
 
   @Prop() options?: L.TileLayerOptions;
 
-  @Watch('options')
-  watchOptionsChange(options: L.TileLayerOptions) {
-    this.tileLayerInstance.options = Object.assign(this.tileLayerInstance.options, options);
-  }
-
   @Prop() active: boolean;
 
   @Watch('active')
@@ -48,7 +43,7 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
   }
 
   constructor() {
-    this.tileLayerInstance = L.tileLayer(this.urlTemplate, this.options);
+    this.createTileLayerInstance();
   }
 
   async connectedCallback() {
@@ -69,5 +64,9 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
 
   render() {
     return <Host></Host>;
+  }
+
+  private createTileLayerInstance() {
+    this.tileLayerInstance = L.tileLayer(this.urlTemplate, this.options);
   }
 }

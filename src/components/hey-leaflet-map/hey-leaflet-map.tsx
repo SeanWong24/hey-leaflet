@@ -10,6 +10,8 @@ export class HeyLeafletMap implements ComponentInterface {
   private containerElement: HTMLElement;
   private mapInstance: L.Map;
 
+  @Prop() options: L.MapOptions;
+
   @Prop() view: L.LatLngExpression = [0, 0];
 
   @Watch('view')
@@ -25,8 +27,7 @@ export class HeyLeafletMap implements ComponentInterface {
   }
 
   componentDidLoad() {
-    this.mapInstance = L.map(this.containerElement);
-    this.initializeProps();
+    this.createMapInstance();
   }
 
   @Method()
@@ -45,5 +46,10 @@ export class HeyLeafletMap implements ComponentInterface {
   private initializeProps() {
     this.watchViewChange(this.view);
     this.watchZoomChange(this.zoom);
+  }
+
+  private createMapInstance() {
+    this.mapInstance = L.map(this.containerElement, this.options);
+    this.initializeProps();
   }
 }
