@@ -12,11 +12,12 @@
 
 <body>
   <hey-leaflet-map id="map" zoom="5" style="width: 500px; height: 500px;">
-    <hey-leaflet-layer-control id="layer-control"></hey-leaflet-layer-control>
-    <hey-leaflet-tile-layer id="tile-layer" active
-      url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
-    </hey-leaflet-tile-layer>
-    <hey-leaflet-geojson id="geojson"></hey-leaflet-geojson>
+    <hey-leaflet-layer-control id="layer-control">
+      <hey-leaflet-tile-layer id="tile-layer" name="Satelitte" active
+        url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
+      </hey-leaflet-tile-layer>
+      <hey-leaflet-geojson id="geojson" name="Polygons" active></hey-leaflet-geojson>
+    </hey-leaflet-layer-control>
   </hey-leaflet-map>
 
   <script>
@@ -100,10 +101,6 @@
 
     const map = document.querySelector('#map');
     map.view = [55, -113];
-
-    const layerControl = document.querySelector('#layer-control');
-    layerControl.baseLayers = { Satelitte: tileLayer };
-    layerControl.overlays = { GeoJSON: geoJSON };
   </script>
 </body>
 

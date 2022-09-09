@@ -7,11 +7,42 @@
 
 ## Properties
 
-| Property     | Attribute | Description | Type                                     | Default     |
-| ------------ | --------- | ----------- | ---------------------------------------- | ----------- |
-| `baseLayers` | --        |             | `{ [name: string]: string \| Element; }` | `undefined` |
-| `options`    | --        |             | `LayersOptions`                          | `undefined` |
-| `overlays`   | --        |             | `{ [name: string]: string \| Element; }` | `undefined` |
+| Property  | Attribute | Description | Type            | Default     |
+| --------- | --------- | ----------- | --------------- | ----------- |
+| `options` | --        |             | `LayersOptions` | `undefined` |
+
+
+## Methods
+
+### `addLayer(layer: L.Layer, name: string, type?: LayerType) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `removeLayer(layer: L.Layer) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `updateActiveStatus(layer: L.Layer, active?: boolean) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ----------------------------------------------

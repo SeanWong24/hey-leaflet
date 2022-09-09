@@ -1,6 +1,6 @@
-import { Component, Host, h, ComponentInterface, Element, Prop, Watch } from '@stencil/core';
+import { Component, Host, h, ComponentInterface, Element, Prop, Method } from '@stencil/core';
 import L from 'leaflet';
-import { LayerElement } from '../../utils/layer-element';
+import { LayerType } from '../../utils/layer-element';
 
 export type LayerControlLayerDict = { [name: string]: string | globalThis.Element };
 type LayerControlResolvedLayerDict = { [name: string]: L.Layer };
@@ -11,7 +11,7 @@ type LayerControlResolvedLayerDict = { [name: string]: L.Layer };
   shadow: true,
 })
 export class HeyLeafletLayerControl implements ComponentInterface {
-  private readonly PARENT_MAP_ELEMENT_TAG = 'hey-leaflet-map';
+  private readonly MAP_ELEMENT_TAG = 'hey-leaflet-map';
 
   private layerControlInstance: L.Control.Layers;
   private mapInstance?: L.Map;
@@ -20,61 +20,57 @@ export class HeyLeafletLayerControl implements ComponentInterface {
 
   private get parentMapElement() {
     const parentElement = this.hostElement?.parentElement;
-    if (parentElement.tagName === this.PARENT_MAP_ELEMENT_TAG.toUpperCase()) {
+    if (parentElement.tagName === this.MAP_ELEMENT_TAG.toUpperCase()) {
       return parentElement as HTMLHeyLeafletMapElement;
     }
   }
 
   @Element() hostElement: HTMLHeyLeafletLayerControlElement;
 
-  @Prop() baseLayers: LayerControlLayerDict;
-
-  @Watch('baseLayers')
-  async watchBaseLayerDictChange(baseLayers: LayerControlLayerDict) {
-    const resolvedDictEntries = await Promise.all(
-      Object.entries(baseLayers).map(async ([name, element]) => {
-        if (typeof element === 'string') {
-          element = this.parentMapElement.querySelector(element);
-        }
-        const layer = await (element as unknown as LayerElement).getLayerInstance();
-        return [name, layer] as [string, L.Layer];
-      }),
-    );
-    this.reslovedBaseLayers = Object.fromEntries(resolvedDictEntries);
-    this.removeLayerControlInstanceFromMap();
-    this.createLayerControlInstance();
-    this.addLayerControlInstanceToMap();
-  }
-
-  @Prop() overlays: LayerControlLayerDict;
-
-  @Watch('overlays')
-  async watchOverlayDictChange(overlays: LayerControlLayerDict) {
-    const resolvedEntries = await Promise.all(
-      Object.entries(overlays).map(async ([name, element]) => {
-        if (typeof element === 'string') {
-          element = this.parentMapElement.querySelector(element);
-        }
-        const layer = await (element as unknown as LayerElement).getLayerInstance();
-        return [name, layer] as [string, L.Layer];
-      }),
-    );
-    this.reslovedOverlays = Object.fromEntries(resolvedEntries);
-    this.removeLayerControlInstanceFromMap();
-    this.createLayerControlInstance();
-    this.addLayerControlInstanceToMap();
-  }
-
   @Prop() options: L.Control.LayersOptions;
+
+  constructor() {
+    this.createLayerControlInstance();
+  }
 
   async connectedCallback() {
     await this.addLayerControlInstanceToMap();
-    this.watchBaseLayerDictChange(this.baseLayers);
-    this.watchOverlayDictChange(this.overlays);
   }
 
   disconnectedCallback() {
     this.removeLayerControlInstanceFromMap();
+  }
+
+  @Method()
+  async addLayer(layer: L.Layer, name: string, type: LayerType = 'overlay') {
+    switch (type) {
+      case 'base-layer':
+        this.layerControlInstance?.addBaseLayer(layer, name);
+        break;
+      case 'overlay':
+        this.layerControlInstance?.addOverlay(layer, name);
+        break;
+    }
+  }
+
+  @Method()
+  async removeLayer(layer: L.Layer) {
+    this.layerControlInstance?.removeLayer(layer);
+  }
+
+  @Method()
+  async updateActiveStatus(layer: L.Layer, active: boolean = false) {
+    if (!this.mapInstance) {
+      setTimeout(() => {
+        this.updateActiveStatus(layer, active);
+      });
+      return;
+    }
+    if (active) {
+      layer?.addTo(this.mapInstance);
+    } else {
+      layer?.removeFrom(this.mapInstance);
+    }
   }
 
   render() {
@@ -91,6 +87,7 @@ export class HeyLeafletLayerControl implements ComponentInterface {
   }
 
   private createLayerControlInstance() {
+    this.layerControlInstance?.remove();
     this.layerControlInstance = L.control.layers(this.reslovedBaseLayers || {}, this.reslovedOverlays || {}, this.options);
   }
 }

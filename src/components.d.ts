@@ -5,19 +5,22 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { LayerType } from "./utils/layer-element";
 import { GeoJsonObject } from "geojson";
-import { LayerControlLayerDict } from "./components/hey-leaflet-layer-control/hey-leaflet-layer-control";
 export namespace Components {
     interface HeyLeafletGeojson {
         "active": boolean;
         "geojson": GeoJsonObject;
         "getLayerInstance": () => Promise<L.GeoJSON<any>>;
+        "name": string;
         "options"?: L.GeoJSONOptions;
+        "type": LayerType;
     }
     interface HeyLeafletLayerControl {
-        "baseLayers": LayerControlLayerDict;
+        "addLayer": (layer: L.Layer, name: string, type?: LayerType) => Promise<void>;
         "options": L.Control.LayersOptions;
-        "overlays": LayerControlLayerDict;
+        "removeLayer": (layer: L.Layer) => Promise<void>;
+        "updateActiveStatus": (layer: L.Layer, active?: boolean) => Promise<void>;
     }
     interface HeyLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
@@ -28,7 +31,9 @@ export namespace Components {
     interface HeyLeafletTileLayer {
         "active": boolean;
         "getLayerInstance": () => Promise<L.TileLayer>;
+        "name": string;
         "options"?: L.TileLayerOptions;
+        "type": LayerType;
         "urlTemplate": string;
     }
 }
@@ -68,12 +73,12 @@ declare namespace LocalJSX {
     interface HeyLeafletGeojson {
         "active"?: boolean;
         "geojson"?: GeoJsonObject;
+        "name"?: string;
         "options"?: L.GeoJSONOptions;
+        "type"?: LayerType;
     }
     interface HeyLeafletLayerControl {
-        "baseLayers"?: LayerControlLayerDict;
         "options"?: L.Control.LayersOptions;
-        "overlays"?: LayerControlLayerDict;
     }
     interface HeyLeafletMap {
         "options"?: L.MapOptions;
@@ -82,7 +87,9 @@ declare namespace LocalJSX {
     }
     interface HeyLeafletTileLayer {
         "active"?: boolean;
+        "name"?: string;
         "options"?: L.TileLayerOptions;
+        "type"?: LayerType;
         "urlTemplate": string;
     }
     interface IntrinsicElements {
