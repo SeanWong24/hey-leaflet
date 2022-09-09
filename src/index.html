@@ -13,17 +13,27 @@
 <body>
   <hey-leaflet-map id="map" zoom="5" view="55 -113" style="width: 500px; height: 500px;">
     <hey-leaflet-layer-control id="layer-control">
-      <hey-leaflet-tile-layer id="tile-layer" name="Satelitte" active
+      <hey-leaflet-tile-layer id="satelitte-layer" name="Satelitte" active
         url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
+      </hey-leaflet-tile-layer>
+      <hey-leaflet-tile-layer id="gw2-layer" name="GW2"
+        url-template="https://tiles{s}.guildwars2.com/1/1/{z}/{x}/{y}.jpg">
       </hey-leaflet-tile-layer>
       <hey-leaflet-geojson id="geojson" name="Polygons" active></hey-leaflet-geojson>
     </hey-leaflet-layer-control>
   </hey-leaflet-map>
 
   <script>
-    const tileLayer = document.querySelector('#tile-layer');
-    tileLayer.options = {
+    const satelitteLayer = document.querySelector('#satelitte-layer');
+    satelitteLayer.options = {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    };
+
+    const gw2Layer = document.querySelector('#gw2-layer');
+    gw2Layer.options = {
+      minZoom: 0,
+      maxZoom: 7,
+      subdomains: [1, 2, 3, 4]
     };
 
     const geoJSON = document.querySelector('#geojson');
