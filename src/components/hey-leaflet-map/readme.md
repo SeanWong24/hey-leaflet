@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type                                          | Default     |
-| --------- | --------- | ----------- | --------------------------------------------- | ----------- |
-| `options` | --        |             | `MapOptions`                                  | `undefined` |
-| `view`    | --        |             | `LatLng \| LatLngLiteral \| [number, number]` | `[0, 0]`    |
-| `zoom`    | `zoom`    |             | `number`                                      | `6`         |
+| Property  | Attribute | Description | Type         | Default     |
+| --------- | --------- | ----------- | ------------ | ----------- |
+| `options` | --        |             | `MapOptions` | `undefined` |
+| `view`    | `view`    |             | `string`     | `'0 0'`     |
+| `zoom`    | `zoom`    |             | `number`     | `6`         |
 
 
 ## Methods

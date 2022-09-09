@@ -12,11 +12,12 @@ export class HeyLeafletMap implements ComponentInterface {
 
   @Prop() options: L.MapOptions;
 
-  @Prop() view: L.LatLngExpression = [0, 0];
+  @Prop({ reflect: true }) view: string = '0 0';
 
   @Watch('view')
-  watchViewChange(view: L.LatLngExpression) {
-    this.mapInstance.setView(view);
+  watchViewChange(view: string) {
+    const [lat, lon] = view.split(/\s+/).map(d => +d);
+    this.mapInstance.setView([lat, lon]);
   }
 
   @Prop() zoom: number = 6;
