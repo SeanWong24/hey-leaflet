@@ -1,6 +1,6 @@
 import { Component, Host, h, ComponentInterface, Prop, Watch, Element, Method } from '@stencil/core';
 import L from 'leaflet';
-import { LayerElement, LayerType } from '../../utils/layer-element';
+import { LayerElement, LayerType, obtainContainerElement as obtainLayerContainerElement, registerLayer, unregisterLayer, updateLayerActiveStatus } from '../../utils/layer-element';
 
 @Component({
   tag: 'hey-leaflet-tile-layer',
@@ -8,18 +8,13 @@ import { LayerElement, LayerType } from '../../utils/layer-element';
   shadow: true,
 })
 export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
-  private readonly MAP_ELEMENT_TAG = 'hey-leaflet-map';
-  private readonly LAYER_CONTROL_ELEMENT_TAG = 'hey-leaflet-layer-control';
-
   private layerInstance: L.TileLayer;
 
   private _containerElement: HTMLHeyLeafletMapElement | HTMLHeyLeafletLayerControlElement;
   private get containerElement() {
-    const parentElement = this.hostElement?.parentElement;
-    if (parentElement?.tagName === this.MAP_ELEMENT_TAG.toUpperCase()) {
-      this._containerElement = parentElement as HTMLHeyLeafletMapElement;
-    } else if (parentElement?.tagName === this.LAYER_CONTROL_ELEMENT_TAG.toUpperCase()) {
-      this._containerElement = parentElement as HTMLHeyLeafletLayerControlElement;
+    const containerElement = obtainLayerContainerElement(this.hostElement);
+    if (containerElement) {
+      this._containerElement = containerElement;
     }
     return this._containerElement;
   }
@@ -41,9 +36,7 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
 
   @Watch('active')
   watchActiveChange(active: boolean) {
-    if (this.containerElement?.tagName === this.LAYER_CONTROL_ELEMENT_TAG.toUpperCase()) {
-      (this.containerElement as HTMLHeyLeafletLayerControlElement)?.updateActiveStatus(this.layerInstance, active);
-    }
+    updateLayerActiveStatus(this.containerElement, this.layerInstance, active);
   }
 
   constructor() {
@@ -51,20 +44,11 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
   }
 
   async connectedCallback() {
-    if (this.containerElement?.tagName === this.LAYER_CONTROL_ELEMENT_TAG.toUpperCase()) {
-      await (this.containerElement as HTMLHeyLeafletLayerControlElement)?.addLayer(this.layerInstance, this.name, this.type);
-      this.watchActiveChange(this.active);
-    } else if (this.containerElement?.tagName === this.MAP_ELEMENT_TAG.toUpperCase()) {
-      const mapInstance = await (this.containerElement as HTMLHeyLeafletMapElement).getMapInstance();
-      this.layerInstance?.addTo(mapInstance);
-    }
+    registerLayer(this.containerElement, this.layerInstance, this.name, this.type, this.active);
   }
 
   async disconnectedCallback() {
-    if (this.containerElement?.tagName === this.LAYER_CONTROL_ELEMENT_TAG.toUpperCase()) {
-      (this.containerElement as HTMLHeyLeafletLayerControlElement).removeLayer(this.layerInstance);
-    }
-    this.layerInstance?.remove();
+    unregisterLayer(this.containerElement, this.layerInstance);
   }
 
   @Method()
