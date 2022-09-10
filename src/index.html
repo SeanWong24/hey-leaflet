@@ -21,7 +21,7 @@
       <hey-leaflet-tile-layer id="gw2-layer" name="GW2"
         url-template="https://tiles{s}.guildwars2.com/1/1/{z}/{x}/{y}.jpg">
       </hey-leaflet-tile-layer>
-      <hey-leaflet-geojson id="geojson" name="Polygons" active></hey-leaflet-geojson>
+      <hey-leaflet-geojson id="geojson" name="GeoJSON" active></hey-leaflet-geojson>
       <hey-leaflet-layer-group name="Markers">
         <hey-leaflet-marker latlng="55 -114"></hey-leaflet-marker>
         <hey-leaflet-marker latlng="56 -114"></hey-leaflet-marker>
@@ -82,10 +82,9 @@
           "type": "Feature",
           "properties": {},
           "geometry": {
-            "type": "Polygon",
+            "type": "LineString",
             "coordinates": [
-              [
-                [
+            [
                   -110.390625,
                   57.136239319177434
                 ],
@@ -100,16 +99,7 @@
                 [
                   -108.6328125,
                   53.12040528310657
-                ],
-                [
-                  -105.1171875,
-                  56.17002298293205
-                ],
-                [
-                  -110.390625,
-                  57.136239319177434
                 ]
-              ]
             ]
           }
         },
