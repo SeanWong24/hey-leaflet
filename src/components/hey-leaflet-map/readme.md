@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type         | Default     |
-| --------- | --------- | ----------- | ------------ | ----------- |
-| `options` | --        |             | `MapOptions` | `undefined` |
-| `view`    | `view`    |             | `string`     | `'0 0'`     |
-| `zoom`    | `zoom`    |             | `number`     | `6`         |
+| Property        | Attribute         | Description | Type         | Default                                    |
+| --------------- | ----------------- | ----------- | ------------ | ------------------------------------------ |
+| `iconImagePath` | `icon-image-path` |             | `string`     | `'https://unpkg.com/leaflet/dist/images/'` |
+| `options`       | --                |             | `MapOptions` | `undefined`                                |
+| `view`          | `view`            |             | `string`     | `'0 0'`                                    |
+| `zoom`          | `zoom`            |             | `number`     | `6`                                        |
 
 
 ## Methods

@@ -24,6 +24,7 @@ export namespace Components {
     }
     interface HeyLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
+        "iconImagePath": string;
         "options": L.MapOptions;
         "view": string;
         "zoom": number;
@@ -81,6 +82,7 @@ declare namespace LocalJSX {
         "options"?: L.Control.LayersOptions;
     }
     interface HeyLeafletMap {
+        "iconImagePath"?: string;
         "options"?: L.MapOptions;
         "view"?: string;
         "zoom"?: number;

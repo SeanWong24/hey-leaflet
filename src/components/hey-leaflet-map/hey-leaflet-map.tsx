@@ -1,4 +1,5 @@
-import { Component, Host, h, ComponentInterface, Method, Prop, Watch } from '@stencil/core';
+import { updateCSSVariable } from '@awesome-elements/utils/dist';
+import { Component, Host, h, ComponentInterface, Method, Prop, Watch, Element } from '@stencil/core';
 import L from 'leaflet';
 
 @Component({
@@ -10,7 +11,17 @@ export class HeyLeafletMap implements ComponentInterface {
   private containerElement: HTMLElement;
   private mapInstance: L.Map;
 
+  @Element() hostElement: HTMLHeyLeafletMapElement;
+
   @Prop() options: L.MapOptions;
+
+  @Prop() iconImagePath: string = 'https://unpkg.com/leaflet/dist/images/';
+
+  @Watch('iconImagePath')
+  watchIconImagePathChange(iconImagePath: string) {
+    L.Icon.Default.imagePath = iconImagePath;
+    updateCSSVariable('--leaflet-control-layer-toggle-icon', `url(${iconImagePath}layers.png)`, this.hostElement);
+  }
 
   @Prop({ reflect: true }) view: string = '0 0';
 
@@ -29,6 +40,7 @@ export class HeyLeafletMap implements ComponentInterface {
 
   componentDidLoad() {
     this.createMapInstance();
+    this.watchIconImagePathChange(this.iconImagePath);
   }
 
   @Method()
