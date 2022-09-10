@@ -8,6 +8,14 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { LayerType } from "./utils/layer-element";
 import { GeoJsonObject } from "geojson";
 export namespace Components {
+    interface HeyLeafletCircleMarker {
+        "active": boolean;
+        "getLayerInstance": () => Promise<L.CircleMarker<any>>;
+        "latlng": string;
+        "name": string;
+        "options"?: L.CircleMarkerOptions;
+        "type": LayerType;
+    }
     interface HeyLeafletGeojson {
         "active": boolean;
         "geojson": GeoJsonObject;
@@ -54,6 +62,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLHeyLeafletCircleMarkerElement extends Components.HeyLeafletCircleMarker, HTMLStencilElement {
+    }
+    var HTMLHeyLeafletCircleMarkerElement: {
+        prototype: HTMLHeyLeafletCircleMarkerElement;
+        new (): HTMLHeyLeafletCircleMarkerElement;
+    };
     interface HTMLHeyLeafletGeojsonElement extends Components.HeyLeafletGeojson, HTMLStencilElement {
     }
     var HTMLHeyLeafletGeojsonElement: {
@@ -91,6 +105,7 @@ declare global {
         new (): HTMLHeyLeafletTileLayerElement;
     };
     interface HTMLElementTagNameMap {
+        "hey-leaflet-circle-marker": HTMLHeyLeafletCircleMarkerElement;
         "hey-leaflet-geojson": HTMLHeyLeafletGeojsonElement;
         "hey-leaflet-layer-control": HTMLHeyLeafletLayerControlElement;
         "hey-leaflet-layer-group": HTMLHeyLeafletLayerGroupElement;
@@ -100,6 +115,13 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface HeyLeafletCircleMarker {
+        "active"?: boolean;
+        "latlng": string;
+        "name"?: string;
+        "options"?: L.CircleMarkerOptions;
+        "type"?: LayerType;
+    }
     interface HeyLeafletGeojson {
         "active"?: boolean;
         "geojson"?: GeoJsonObject;
@@ -137,6 +159,7 @@ declare namespace LocalJSX {
         "urlTemplate": string;
     }
     interface IntrinsicElements {
+        "hey-leaflet-circle-marker": HeyLeafletCircleMarker;
         "hey-leaflet-geojson": HeyLeafletGeojson;
         "hey-leaflet-layer-control": HeyLeafletLayerControl;
         "hey-leaflet-layer-group": HeyLeafletLayerGroup;
@@ -149,6 +172,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "hey-leaflet-circle-marker": LocalJSX.HeyLeafletCircleMarker & JSXBase.HTMLAttributes<HTMLHeyLeafletCircleMarkerElement>;
             "hey-leaflet-geojson": LocalJSX.HeyLeafletGeojson & JSXBase.HTMLAttributes<HTMLHeyLeafletGeojsonElement>;
             "hey-leaflet-layer-control": LocalJSX.HeyLeafletLayerControl & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerControlElement>;
             "hey-leaflet-layer-group": LocalJSX.HeyLeafletLayerGroup & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerGroupElement>;
