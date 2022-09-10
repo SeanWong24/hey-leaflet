@@ -4,14 +4,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <base href="./">
   <title>hey-leaflet</title>
 
-  <script type="module" src="/build/hey-leaflet.esm.js"></script>
-  <script nomodule src="/build/hey-leaflet.js"></script>
+  <script type="module" src="./build/hey-leaflet.esm.js"></script>
+  <script nomodule src="./build/hey-leaflet.js"></script>
 </head>
 
 <body>
-  <hey-leaflet-map id="map" zoom="5" view="55 -113" icon-image-path="leaflet/images/"
+  <hey-leaflet-map id="map" zoom="5" view="55 -113" icon-image-path="./leaflet/images/"
     style="width: 500px; height: 500px;">
     <hey-leaflet-layer-control id="layer-control">
       <hey-leaflet-tile-layer id="satelitte-layer" name="Satelitte" active
