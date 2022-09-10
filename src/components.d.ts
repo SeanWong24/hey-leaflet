@@ -29,6 +29,14 @@ export namespace Components {
         "view": string;
         "zoom": number;
     }
+    interface HeyLeafletMarker {
+        "active": boolean;
+        "getLayerInstance": () => Promise<L.Marker<any>>;
+        "latlng": string;
+        "name": string;
+        "options"?: L.MarkerOptions;
+        "type": LayerType;
+    }
     interface HeyLeafletTileLayer {
         "active": boolean;
         "getLayerInstance": () => Promise<L.TileLayer>;
@@ -57,6 +65,12 @@ declare global {
         prototype: HTMLHeyLeafletMapElement;
         new (): HTMLHeyLeafletMapElement;
     };
+    interface HTMLHeyLeafletMarkerElement extends Components.HeyLeafletMarker, HTMLStencilElement {
+    }
+    var HTMLHeyLeafletMarkerElement: {
+        prototype: HTMLHeyLeafletMarkerElement;
+        new (): HTMLHeyLeafletMarkerElement;
+    };
     interface HTMLHeyLeafletTileLayerElement extends Components.HeyLeafletTileLayer, HTMLStencilElement {
     }
     var HTMLHeyLeafletTileLayerElement: {
@@ -67,6 +81,7 @@ declare global {
         "hey-leaflet-geojson": HTMLHeyLeafletGeojsonElement;
         "hey-leaflet-layer-control": HTMLHeyLeafletLayerControlElement;
         "hey-leaflet-map": HTMLHeyLeafletMapElement;
+        "hey-leaflet-marker": HTMLHeyLeafletMarkerElement;
         "hey-leaflet-tile-layer": HTMLHeyLeafletTileLayerElement;
     }
 }
@@ -87,6 +102,13 @@ declare namespace LocalJSX {
         "view"?: string;
         "zoom"?: number;
     }
+    interface HeyLeafletMarker {
+        "active"?: boolean;
+        "latlng": string;
+        "name"?: string;
+        "options"?: L.MarkerOptions;
+        "type"?: LayerType;
+    }
     interface HeyLeafletTileLayer {
         "active"?: boolean;
         "name"?: string;
@@ -98,6 +120,7 @@ declare namespace LocalJSX {
         "hey-leaflet-geojson": HeyLeafletGeojson;
         "hey-leaflet-layer-control": HeyLeafletLayerControl;
         "hey-leaflet-map": HeyLeafletMap;
+        "hey-leaflet-marker": HeyLeafletMarker;
         "hey-leaflet-tile-layer": HeyLeafletTileLayer;
     }
 }
@@ -108,6 +131,7 @@ declare module "@stencil/core" {
             "hey-leaflet-geojson": LocalJSX.HeyLeafletGeojson & JSXBase.HTMLAttributes<HTMLHeyLeafletGeojsonElement>;
             "hey-leaflet-layer-control": LocalJSX.HeyLeafletLayerControl & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerControlElement>;
             "hey-leaflet-map": LocalJSX.HeyLeafletMap & JSXBase.HTMLAttributes<HTMLHeyLeafletMapElement>;
+            "hey-leaflet-marker": LocalJSX.HeyLeafletMarker & JSXBase.HTMLAttributes<HTMLHeyLeafletMarkerElement>;
             "hey-leaflet-tile-layer": LocalJSX.HeyLeafletTileLayer & JSXBase.HTMLAttributes<HTMLHeyLeafletTileLayerElement>;
         }
     }

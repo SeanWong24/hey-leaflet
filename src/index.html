@@ -11,7 +11,8 @@
 </head>
 
 <body>
-  <hey-leaflet-map id="map" zoom="5" view="55 -113" icon-image-path="leaflet/images/" style="width: 500px; height: 500px;">
+  <hey-leaflet-map id="map" zoom="5" view="55 -113" icon-image-path="leaflet/images/"
+    style="width: 500px; height: 500px;">
     <hey-leaflet-layer-control id="layer-control">
       <hey-leaflet-tile-layer id="satelitte-layer" name="Satelitte" active
         url-template="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">
@@ -21,6 +22,7 @@
       </hey-leaflet-tile-layer>
       <hey-leaflet-geojson id="geojson" name="Polygons" active></hey-leaflet-geojson>
     </hey-leaflet-layer-control>
+    <hey-leaflet-marker latlng="55 -114"></hey-leaflet-marker>
   </hey-leaflet-map>
 
   <script>
