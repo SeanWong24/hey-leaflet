@@ -6,6 +6,7 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [{ src: '../node_modules/leaflet/dist/images', dest: 'leaflet/images' }],
     },
     {
       type: 'dist-custom-elements',
@@ -16,6 +17,7 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [{ src: '../node_modules/leaflet/dist/images', dest: 'leaflet/images' }],
     },
   ],
 };
