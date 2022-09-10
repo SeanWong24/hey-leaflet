@@ -2,3 +2,9 @@
 
 # Hey-Leaflet
 A web component wrapper for Leaflet.js.
+
+## Import
+```html
+<script type="module" src="https://seanwong24.github.io/hey-leaflet/build/hey-leaflet.esm.js"></script>
+<script nomodule src="https://seanwong24.github.io/hey-leaflet/build/hey-leaflet.js"></script>
+```
