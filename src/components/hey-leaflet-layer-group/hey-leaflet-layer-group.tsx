@@ -1,14 +1,14 @@
-import { Component, Host, h, ComponentInterface, Prop, Watch, Element, Method } from '@stencil/core';
+import { Component, Host, h, ComponentInterface, Method, Prop, Watch, Element } from '@stencil/core';
 import L from 'leaflet';
 import { LayerContainerElement, LayerElement, LayerType, obtainLayerContainerElement, registerLayer, unregisterLayer, updateLayerActiveStatus } from '../../utils/layer-element';
 
 @Component({
-  tag: 'hey-leaflet-tile-layer',
-  styleUrl: 'hey-leaflet-tile-layer.css',
+  tag: 'hey-leaflet-layer-group',
+  styleUrl: 'hey-leaflet-layer-group.css',
   shadow: true,
 })
-export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
-  private layerInstance: L.TileLayer;
+export class HeyLeafletLayerGroup implements ComponentInterface, LayerElement {
+  private layerInstance: L.LayerGroup;
 
   private _containerElement: LayerContainerElement;
   private get containerElement() {
@@ -19,18 +19,11 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
     return this._containerElement;
   }
 
-  @Element() hostElement: HTMLHeyLeafletTileLayerElement;
+  @Element() hostElement: HTMLHeyLeafletLayerGroupElement;
 
-  @Prop() type: LayerType = 'base-layer';
-  @Prop() name: string = 'Tile';
-  @Prop() urlTemplate!: string;
-
-  @Watch('urlTemplate')
-  watchUrlTemplateChange(urlTemplate: string) {
-    this.layerInstance?.setUrl(urlTemplate);
-  }
-
-  @Prop() options?: L.TileLayerOptions;
+  @Prop() type: LayerType = 'overlay';
+  @Prop() name: string = 'Layer Group';
+  @Prop() options?: L.LayerOptions;
 
   @Prop() active: boolean;
 
@@ -62,6 +55,6 @@ export class HeyLeafletTileLayer implements ComponentInterface, LayerElement {
 
   private createLayerInstance() {
     this.layerInstance?.remove();
-    this.layerInstance = L.tileLayer(this.urlTemplate, this.options);
+    this.layerInstance = L.layerGroup([], this.options);
   }
 }

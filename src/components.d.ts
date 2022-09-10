@@ -22,6 +22,13 @@ export namespace Components {
         "removeLayer": (layer: L.Layer) => Promise<void>;
         "updateActiveStatus": (layer: L.Layer, active?: boolean) => Promise<void>;
     }
+    interface HeyLeafletLayerGroup {
+        "active": boolean;
+        "getLayerInstance": () => Promise<L.LayerGroup<any>>;
+        "name": string;
+        "options"?: L.LayerOptions;
+        "type": LayerType;
+    }
     interface HeyLeafletMap {
         "getMapInstance": () => Promise<L.Map>;
         "iconImagePath": string;
@@ -59,6 +66,12 @@ declare global {
         prototype: HTMLHeyLeafletLayerControlElement;
         new (): HTMLHeyLeafletLayerControlElement;
     };
+    interface HTMLHeyLeafletLayerGroupElement extends Components.HeyLeafletLayerGroup, HTMLStencilElement {
+    }
+    var HTMLHeyLeafletLayerGroupElement: {
+        prototype: HTMLHeyLeafletLayerGroupElement;
+        new (): HTMLHeyLeafletLayerGroupElement;
+    };
     interface HTMLHeyLeafletMapElement extends Components.HeyLeafletMap, HTMLStencilElement {
     }
     var HTMLHeyLeafletMapElement: {
@@ -80,6 +93,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "hey-leaflet-geojson": HTMLHeyLeafletGeojsonElement;
         "hey-leaflet-layer-control": HTMLHeyLeafletLayerControlElement;
+        "hey-leaflet-layer-group": HTMLHeyLeafletLayerGroupElement;
         "hey-leaflet-map": HTMLHeyLeafletMapElement;
         "hey-leaflet-marker": HTMLHeyLeafletMarkerElement;
         "hey-leaflet-tile-layer": HTMLHeyLeafletTileLayerElement;
@@ -95,6 +109,12 @@ declare namespace LocalJSX {
     }
     interface HeyLeafletLayerControl {
         "options"?: L.Control.LayersOptions;
+    }
+    interface HeyLeafletLayerGroup {
+        "active"?: boolean;
+        "name"?: string;
+        "options"?: L.LayerOptions;
+        "type"?: LayerType;
     }
     interface HeyLeafletMap {
         "iconImagePath"?: string;
@@ -119,6 +139,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "hey-leaflet-geojson": HeyLeafletGeojson;
         "hey-leaflet-layer-control": HeyLeafletLayerControl;
+        "hey-leaflet-layer-group": HeyLeafletLayerGroup;
         "hey-leaflet-map": HeyLeafletMap;
         "hey-leaflet-marker": HeyLeafletMarker;
         "hey-leaflet-tile-layer": HeyLeafletTileLayer;
@@ -130,6 +151,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "hey-leaflet-geojson": LocalJSX.HeyLeafletGeojson & JSXBase.HTMLAttributes<HTMLHeyLeafletGeojsonElement>;
             "hey-leaflet-layer-control": LocalJSX.HeyLeafletLayerControl & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerControlElement>;
+            "hey-leaflet-layer-group": LocalJSX.HeyLeafletLayerGroup & JSXBase.HTMLAttributes<HTMLHeyLeafletLayerGroupElement>;
             "hey-leaflet-map": LocalJSX.HeyLeafletMap & JSXBase.HTMLAttributes<HTMLHeyLeafletMapElement>;
             "hey-leaflet-marker": LocalJSX.HeyLeafletMarker & JSXBase.HTMLAttributes<HTMLHeyLeafletMarkerElement>;
             "hey-leaflet-tile-layer": LocalJSX.HeyLeafletTileLayer & JSXBase.HTMLAttributes<HTMLHeyLeafletTileLayerElement>;

@@ -1,7 +1,7 @@
 import { Component, Host, h, ComponentInterface, Prop, Watch, Element, Method } from '@stencil/core';
 import { GeoJsonObject } from 'geojson';
 import L from 'leaflet';
-import { LayerElement, LayerType, obtainContainerElement, registerLayer, unregisterLayer, updateLayerActiveStatus } from '../../utils/layer-element';
+import { LayerContainerElement, LayerElement, LayerType, obtainLayerContainerElement, registerLayer, unregisterLayer, updateLayerActiveStatus } from '../../utils/layer-element';
 
 @Component({
   tag: 'hey-leaflet-geojson',
@@ -11,9 +11,9 @@ import { LayerElement, LayerType, obtainContainerElement, registerLayer, unregis
 export class HeyLeafletGeojson implements ComponentInterface, LayerElement {
   private layerInstance: L.GeoJSON;
 
-  private _containerElement: HTMLHeyLeafletMapElement | HTMLHeyLeafletLayerControlElement;
+  private _containerElement: LayerContainerElement;
   private get containerElement() {
-    const containerElement = obtainContainerElement(this.hostElement);
+    const containerElement = obtainLayerContainerElement(this.hostElement);
     if (containerElement) {
       this._containerElement = containerElement;
     }
